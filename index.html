@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SolarAI — Midwest Data Center Power Advisory</title>
+
+<!-- SEO META -->
+<meta name="description" content="SolarAI helps Midwest data center developers solve the #1 problem killing their projects: power access. NABCEP certified. ICC certified. Illinois & PJM territory.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.solaraiusa.com/">
+
+<!-- OPEN GRAPH -->
+<meta property="og:title" content="SolarAI — Midwest Data Center Power Advisory">
+<meta property="og:description" content="We find your power. You build your data center. AI-powered interconnection advisory for Midwest data center developers.">
+<meta property="og:image" content="https://www.solaraiusa.com/public/og-image.png">
+<meta property="og:url" content="https://www.solaraiusa.com">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SolarAI">
+
+<!-- TWITTER -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SolarAI — Midwest Data Center Power Advisory">
+<meta name="twitter:description" content="We find your power. You build your data center.">
+<meta name="twitter:image" content="https://www.solaraiusa.com/public/og-image.png">
+
+<!-- GOOGLE ANALYTICS 4 -->
+<!-- [REQUIRED INPUT]: Replace G-XXXXXXXXXX with real GA4 Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+
+  function trackCTA(label) {
+    gtag('event', 'cta_click', {
+      event_category: 'engagement',
+      event_label: label
+    });
+  }
+</script>
+
+<!-- CALENDLY -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+<!-- FONTS — loaded async to avoid render blocking -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- FAVICON -->
+<link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+
+<style>
+  :root {
+    --bg: #080c10;
+    --surface: #0d1117;
+    --border: #1a2332;
+    --border-bright: #243040;
+    --amber: #f0a500;
+    --amber-dim: #c07800;
+    --amber-glow: rgba(240,165,0,0.12);
+    --text: #e8edf2;
+    --text-dim: #8899aa;
+    --text-faint: #445566;
+    --white: #ffffff;
+    --green: #00d97e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(240,165,0,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,165,0,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(8,12,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo-dot {
+    width: 8px; height: 8px;
+    background: var(--amber);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  .nav-cta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--amber);
+    border: none;
+    padding: 9px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #ffc840; }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px; right: -100px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(240,165,0,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--amber);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(40px, 5vw, 62px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 em { font-style: normal; color: var(--amber); }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 480px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--amber);
+    border: none;
+    padding: 16px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #ffc840; transform: translateY(-1px); }
+
+  .btn-ghost {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid var(--border-bright);
+    padding: 16px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+
+  .stat-cell {
+    background: var(--surface);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .stat-cell:hover { background: #111820; }
+  .stat-cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--amber);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .stat-cell:hover::before { opacity: 1; }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    letter-spacing: -0.03em;
+    color: var(--amber);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .credentials {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cred-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    white-space: nowrap;
+    margin-right: 40px;
+    flex-shrink: 0;
+  }
+
+  .cred-items { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+
+  .cred-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cred-item .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+
+  section { position: relative; z-index: 1; }
+
+  .section-inner { max-width: 1200px; margin: 0 auto; padding: 100px 48px; }
+
+  .section-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(30px, 4vw, 46px);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+  h2 em { font-style: normal; color: var(--amber); }
+
+  .problem { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+  .problem-text p { color: var(--text-dim); font-size: 17px; font-weight: 300; line-height: 1.8; margin-bottom: 20px; }
+  .problem-text p strong { color: var(--text); font-weight: 500; }
+
+  .pain-list { list-style: none; display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 40px; }
+
+  .pain-item { background: var(--bg); padding: 24px 28px; display: flex; gap: 16px; align-items: flex-start; transition: background 0.2s; }
+  .pain-item:hover { background: #0e1520; }
+  .pain-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .pain-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--white); margin-bottom: 4px; }
+  .pain-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; font-weight: 300; }
+
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 60px; }
+
+  .step { background: var(--bg); padding: 40px 28px; position: relative; transition: background 0.3s; }
+  .step:hover { background: #0e1520; }
+  .step-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: var(--amber); margin-bottom: 20px; display: block; }
+  .step-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
+  .step-desc { font-size: 14px; color: var(--text-dim); line-height: 1.7; font-weight: 300; }
+  .step-arrow { position: absolute; top: 40px; right: -12px; width: 24px; height: 24px; background: var(--amber); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--bg); z-index: 2; }
+  .step:last-child .step-arrow { display: none; }
+
+  .serve-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 60px; }
+  .serve-card { background: var(--surface); padding: 48px 40px; transition: background 0.3s; }
+  .serve-card:hover { background: #111820; }
+  .serve-badge { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bg); background: var(--amber); display: inline-block; padding: 4px 10px; margin-bottom: 24px; }
+  .serve-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 22px; color: var(--white); margin-bottom: 16px; line-height: 1.2; }
+  .serve-desc { font-size: 15px; font-weight: 300; color: var(--text-dim); line-height: 1.8; margin-bottom: 24px; }
+  .serve-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .serve-list li { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-dim); display: flex; align-items: center; gap: 10px; }
+  .serve-list li::before { content: '→'; color: var(--amber); flex-shrink: 0; }
+
+  .midwest { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .midwest-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+  .midwest-reasons { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
+
+  .reason { display: flex; gap: 20px; align-items: flex-start; padding: 24px; border: 1px solid var(--border); transition: border-color 0.3s, background 0.3s; }
+  .reason:hover { border-color: var(--amber-dim); background: var(--amber-glow); }
+  .reason-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .reason-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--white); margin-bottom: 4px; }
+  .reason-text { font-size: 13px; color: var(--text-dim); font-weight: 300; line-height: 1.6; }
+
+  .midwest-quote { padding: 48px; border: 1px solid var(--border); background: var(--bg); position: relative; }
+  .midwest-quote::before { content: '"'; position: absolute; top: 24px; left: 36px; font-family: 'Syne', sans-serif; font-size: 120px; font-weight: 800; color: var(--amber); opacity: 0.15; line-height: 1; }
+  .midwest-quote blockquote { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 600; line-height: 1.5; color: var(--text); position: relative; margin-bottom: 28px; }
+  .midwest-quote cite { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); font-style: normal; }
+
+  .fee-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 60px; }
+  .fee-card { background: var(--bg); padding: 48px 36px; transition: background 0.3s; }
+  .fee-card.featured { background: var(--amber-glow); border: 1px solid var(--amber-dim); margin: -1px; }
+  .fee-card:hover:not(.featured) { background: #0e1520; }
+  .fee-type { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 20px; }
+  .fee-card.featured .fee-type { color: var(--amber); }
+  .fee-range { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 34px; letter-spacing: -0.03em; color: var(--white); margin-bottom: 8px; line-height: 1; }
+  .fee-basis { font-size: 13px; color: var(--text-faint); margin-bottom: 24px; font-weight: 300; }
+  .fee-card.featured .fee-range { color: var(--amber); }
+  .fee-desc { font-size: 14px; color: var(--text-dim); font-weight: 300; line-height: 1.7; }
+
+  .cta-section { padding: 0 48px 100px; position: relative; z-index: 1; }
+  .cta-box { max-width: 1200px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; padding: 60px 64px; position: relative; overflow: hidden; }
+  .cta-box::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--amber); }
+  .cta-box::after { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(240,165,0,0.06) 0%, transparent 70%); pointer-events: none; }
+  .cta-heading { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 32px; letter-spacing: -0.03em; color: var(--white); margin-bottom: 12px; }
+  .cta-sub { font-size: 16px; color: var(--text-dim); font-weight: 300; line-height: 1.6; }
+  .cta-right { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; align-items: flex-end; }
+  .cta-note { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
+
+  footer { border-top: 1px solid var(--border); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+  .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: -0.02em; color: var(--white); }
+  .footer-info { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--text-faint); text-align: center; line-height: 1.8; }
+  .footer-contact { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--amber); text-decoration: none; letter-spacing: 0.06em; }
+  .footer-contact:hover { text-decoration: underline; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .ticker-bar { background: var(--amber); padding: 10px 0; overflow: hidden; position: relative; z-index: 1; }
+  .ticker-track { display: flex; gap: 0; white-space: nowrap; animation: ticker 30s linear infinite; }
+  .ticker-item { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg); padding: 0 48px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+  .ticker-item::before { content: '◆'; font-size: 8px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .section-inner { padding: 60px 24px; }
+    .problem-grid, .midwest-inner, .serve-grid { grid-template-columns: 1fr; gap: 40px; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .fee-grid { grid-template-columns: 1fr; }
+    .cta-box { grid-template-columns: 1fr; gap: 32px; padding: 40px 32px; }
+    .cta-right { align-items: flex-start; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .credentials { padding: 16px 24px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    SolarAI
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#who">Who We Serve</a></li>
+    <li><a href="#midwest">Why Midwest</a></li>
+    <li><a href="#fees">Fees</a></li>
+  </ul>
+  <!-- [REQUIRED INPUT]: Replace YOUR_CALENDLY_URL below with your actual Calendly link -->
+  <a href="#" onclick="Calendly.showPopupWidget('https://calendly.com/YOUR_USERNAME/discovery-call'); trackCTA('nav_cta'); return false;" class="nav-cta">Schedule a Call</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">Midwest Power Advisory</div>
+      <h1>We find your <em>power.</em> You build your data center.</h1>
+      <p class="hero-sub">SolarAI helps Midwest data center developers solve the #1 problem killing their projects: power access. We navigate interconnection queues, structure PPAs, and identify viable sites — so you can break ground years ahead of schedule.</p>
+      <div class="hero-actions">
+        <a href="#" onclick="Calendly.showPopupWidget('https://calendly.com/YOUR_USERNAME/discovery-call'); trackCTA('hero_primary'); return false;" class="btn-primary">Schedule a Discovery Call</a>
+        <a href="#process" class="btn-ghost" onclick="trackCTA('hero_secondary');">See How It Works</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-cell">
+        <span class="stat-num">7yr</span>
+        <span class="stat-label">Average grid connection<br>wait in congested markets</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-num">72%</span>
+        <span class="stat-label">Of data center execs say<br>power is their #1 challenge</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-num">$200B</span>
+        <span class="stat-label">Spent by top 4 hyperscalers<br>on CapEx in 2024 alone</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-num">2%</span>
+        <span class="stat-label">Of queued projects actually<br>reach completion annually</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="credentials">
+  <span class="cred-label">Credentials</span>
+  <div class="cred-items">
+    <div class="cred-item"><span class="dot"></span>NABCEP Certified — Solar Energy</div>
+    <div class="cred-item"><span class="dot"></span>Illinois Commerce Commission Certified</div>
+    <div class="cred-item"><span class="dot"></span>ICC Docket P2025-0453</div>
+    <div class="cred-item"><span class="dot"></span>PJM Interconnection Territory</div>
+    <div class="cred-item"><span class="dot"></span>ComEd &amp; Ameren Service Territory</div>
+  </div>
+</div>
+
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span class="ticker-item">Power is the bottleneck</span>
+    <span class="ticker-item">Illinois CEJA mandates 100% clean energy by 2050</span>
+    <span class="ticker-item">5,000+ U.S. data centers competing for grid access</span>
+    <span class="ticker-item">PJM interconnection queue: years of backlog</span>
+    <span class="ticker-item">Off-market solar PPAs available now</span>
+    <span class="ticker-item">We move in 30–60 days, not 18–24 months</span>
+    <span class="ticker-item">Power is the bottleneck</span>
+    <span class="ticker-item">Illinois CEJA mandates 100% clean energy by 2050</span>
+    <span class="ticker-item">5,000+ U.S. data centers competing for grid access</span>
+    <span class="ticker-item">PJM interconnection queue: years of backlog</span>
+    <span class="ticker-item">Off-market solar PPAs available now</span>
+    <span class="ticker-item">We move in 30–60 days, not 18–24 months</span>
+  </div>
+</div>
+
+<section class="problem" id="problem">
+  <div class="section-inner">
+    <div class="problem-grid">
+      <div class="problem-text">
+        <div class="section-tag">// The Problem</div>
+        <h2>Your data center is ready. The <em>grid</em> isn't.</h2>
+        <p>AI infrastructure demand is doubling every two years. But the power grid — and the bureaucracy around it — was built for a different era. Developers with capital, sites, and customers are stuck waiting for power that won't arrive for years.</p>
+        <p>The hyperscalers have armies of lawyers and lobbyists. <strong>Tier 2 and Tier 3 operators building 5MW to 100MW facilities are navigating this alone.</strong> That's where projects die.</p>
+        <p>SolarAI was built for exactly this gap. We know the Illinois regulatory environment, the PJM interconnection process, and how to structure power agreements that actually close.</p>
+      </div>
+      <ul class="pain-list">
+        <li class="pain-item">
+          <span class="pain-icon">⏳</span>
+          <div>
+            <div class="pain-title">Interconnection Queues That Take Years</div>
+            <div class="pain-desc">Standard FERC queue submissions mean 5–7 year waits in congested markets. Your project can't wait that long.</div>
+          </div>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">🗺️</span>
+          <div>
+            <div class="pain-title">No Visibility Into Grid Capacity</div>
+            <div class="pain-desc">Utility capacity maps are outdated, opaque, and change constantly. You can't make site decisions without real data.</div>
+          </div>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">📋</span>
+          <div>
+            <div class="pain-title">Regulatory Complexity at Every Turn</div>
+            <div class="pain-desc">Illinois CEJA, ComEd tariffs, ICC filings, PJM rules — each layer adds time and cost without the right guide.</div>
+          </div>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">💸</span>
+          <div>
+            <div class="pain-title">Expensive Consultants, Slow Results</div>
+            <div class="pain-desc">Traditional energy consultants charge retainers for months of work. SolarAI delivers AI-accelerated analysis in days.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="section-inner">
+    <div class="section-tag">// How It Works</div>
+    <h2>From power problem to <em>signed agreement</em> — in four steps.</h2>
+    <div class="process-steps">
+      <div class="step">
+        <span class="step-num">01 — Discovery</span>
+        <div class="step-title">We Map Your Power Requirements</div>
+        <p class="step-desc">A 60-minute discovery session covers your load profile, timeline, location preferences, sustainability goals, and budget. No retainer required to start.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <span class="step-num">02 — Intelligence</span>
+        <div class="step-title">AI-Powered Site & Grid Analysis</div>
+        <p class="step-desc">Our proprietary analysis combines FERC queue data, ComEd/Ameren grid capacity, solar irradiance, land topology, and zoning to identify viable power pathways — in days, not months.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <span class="step-num">03 — Matching</span>
+        <div class="step-title">Connect to Verified Power Sources</div>
+        <p class="step-desc">We connect you to pre-vetted solar developers, landowners, and utilities offering PPAs, behind-the-meter solutions, and direct interconnection — off-market and exclusive.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <span class="step-num">04 — Close</span>
+        <div class="step-title">Structure and Execute the Deal</div>
+        <p class="step-desc">We work alongside your legal team to structure the PPA or site agreement, navigate ICC filings, and get you to execution. We earn our fee only when you do.</p>
+        <div class="step-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="problem" id="who">
+  <div class="section-inner">
+    <div class="section-tag">// Who We Serve</div>
+    <h2>Built for the operators the big firms <em>ignore.</em></h2>
+    <div class="serve-grid">
+      <div class="serve-card">
+        <span class="serve-badge">Primary</span>
+        <div class="serve-title">Data Center Developers & Operators</div>
+        <p class="serve-desc">Building 5MW–100MW facilities in the Midwest. You have the capital and the demand signal. You need power — before your competitors lock up available capacity.</p>
+        <ul class="serve-list">
+          <li>Colocation & edge data center operators</li>
+          <li>AI compute infrastructure builders</li>
+          <li>Enterprise private data center developers</li>
+          <li>Regional hyperscale facility developers</li>
+        </ul>
+      </div>
+      <div class="serve-card">
+        <span class="serve-badge">Secondary</span>
+        <div class="serve-title">Investors & PE Firms Backing Data Centers</div>
+        <p class="serve-desc">Underwriting a facility and need confidence that power is solvable before closing. We provide due diligence intelligence and power procurement support for investment decisions.</p>
+        <ul class="serve-list">
+          <li>Infrastructure-focused private equity</li>
+          <li>Real estate investors entering data centers</li>
+          <li>Family offices exploring compute infrastructure</li>
+          <li>Project finance teams evaluating feasibility</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="midwest">
+  <div class="section-inner midwest-inner">
+    <div>
+      <div class="section-tag">// Why Illinois & The Midwest</div>
+      <h2>Virginia is full. Texas is expensive. The <em>Midwest is open.</em></h2>
+      <div class="midwest-reasons">
+        <div class="reason">
+          <span class="reason-icon">⚡</span>
+          <div>
+            <div class="reason-title">PJM Grid — Largest in North America</div>
+            <div class="reason-text">Illinois sits inside PJM, serving 65 million people across 13 states. Significant renewable capacity is being added — and we know how to access it before it's queued out.</div>
+          </div>
+        </div>
+        <div class="reason">
+          <span class="reason-icon">☀️</span>
+          <div>
+            <div class="reason-title">Illinois CEJA Creates Unique Opportunities</div>
+            <div class="reason-text">The Climate and Equitable Jobs Act mandates 100% clean energy by 2050 — creating a wave of new solar development and favorable policy for renewable power procurement.</div>
+          </div>
+        </div>
+        <div class="reason">
+          <span class="reason-icon">🏙️</span>
+          <div>
+            <div class="reason-title">Chicago: Fiber Hub, Financial Capital, Talent</div>
+            <div class="reason-text">Dense fiber infrastructure, proximity to Loop financial firms, and deep tech talent make Chicago a natural data center hub — dramatically underbuilt relative to demand.</div>
+          </div>
+        </div>
+        <div class="reason">
+          <span class="reason-icon">🎯</span>
+          <div>
+            <div class="reason-title">ICC Certified — Regulatory Fluency Nobody Else Has</div>
+            <div class="reason-text">SolarAI holds Illinois Commerce Commission certification and NABCEP credentials. We speak the language of Illinois regulators and utilities — translating directly into faster timelines for you.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="midwest-quote">
+      <blockquote>"The firms that move first on energy advisory relationships will define the next cycle of deal flow before the grid catches up."</blockquote>
+      <cite>— Goldman Sachs Research, April 2026</cite>
+    </div>
+  </div>
+</section>
+
+<section class="problem" id="fees">
+  <div class="section-inner">
+    <div class="section-tag">// Fee Structure</div>
+    <h2>We only win when <em>you</em> win.</h2>
+    <div class="fee-grid">
+      <div class="fee-card">
+        <div class="fee-type">Feasibility Report</div>
+        <div class="fee-range">$3K–15K</div>
+        <div class="fee-basis">Per site / scenario</div>
+        <p class="fee-desc">AI-powered site feasibility and interconnection analysis delivered in 5–10 business days. Replaces months of consultant work. No success condition required.</p>
+      </div>
+      <div class="fee-card featured">
+        <div class="fee-type">★ Full Advisory</div>
+        <div class="fee-range">1–3%</div>
+        <div class="fee-basis">Of executed deal value</div>
+        <p class="fee-desc">End-to-end power procurement advisory: site analysis, source matching, deal structuring, and execution support. Success fee — we earn nothing until you close. Typical engagement: $250K–$2M+.</p>
+      </div>
+      <div class="fee-card">
+        <div class="fee-type">Retainer + Advisory</div>
+        <div class="fee-range">Custom</div>
+        <div class="fee-basis">Monthly + reduced success fee</div>
+        <p class="fee-desc">For investors or developers requiring ongoing market intelligence, multiple site analysis, and priority access to our off-market power pipeline. Contact us to discuss.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <div class="cta-box">
+    <div>
+      <div class="cta-heading">Power is being claimed right now. Is yours?</div>
+      <p class="cta-sub">Every week that passes is another week of interconnection queue movement you're not part of. A 30-minute call costs nothing. Walking away from a viable site costs everything.</p>
+    </div>
+    <div class="cta-right">
+      <a href="#" onclick="Calendly.showPopupWidget('https://calendly.com/YOUR_USERNAME/discovery-call'); trackCTA('bottom_primary'); return false;" class="btn-primary">Schedule Discovery Call</a>
+      <a href="mailto:contact@solaraiusa.com" onclick="trackCTA('bottom_email');" class="btn-ghost">Send a Project Brief</a>
+      <span class="cta-note">No retainer to start</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">SolarAI</div>
+  <div class="footer-info">
+    SolarAI, LLC — Chicago, Illinois<br>
+    NABCEP Certified · ICC Certified · Docket P2025-0453
+  </div>
+  <a href="mailto:contact@solaraiusa.com" class="footer-contact">contact@solaraiusa.com</a>
+</footer>
+
+</body>
+</html>
