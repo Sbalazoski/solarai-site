@@ -25,7 +25,7 @@
 <meta name="twitter:image" content="https://www.solaraiusa.com/public/og-image.png">
 
 <!-- GOOGLE ANALYTICS 4 -->
-<!-- [REQUIRED INPUT]: Replace G-XXXXXXXXXX with real GA4 Measurement ID -->
+<!-- [REQUIRED INPUT]: Replace G-XXXXXXXXXX with your real GA4 Measurement ID from https://analytics.google.com/ -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -473,6 +473,23 @@
   .ticker-item::before { content: '◆'; font-size: 8px; }
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+  .lead-capture { padding: 0 48px 60px; position: relative; z-index: 1; }
+  .lead-box { max-width: 800px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); padding: 40px; position: relative; }
+  .lead-header { margin-bottom: 28px; }
+  .lead-tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 12px; }
+  .lead-header h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 22px; color: var(--white); margin-bottom: 8px; }
+  .lead-header p { font-size: 14px; color: var(--text-dim); }
+  .lead-form { display: flex; flex-direction: column; gap: 16px; }
+  .lead-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .lead-form input, .lead-form textarea { background: var(--bg); border: 1px solid var(--border); padding: 14px 16px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; transition: border-color 0.2s; }
+  .lead-form input:focus, .lead-form textarea:focus { outline: none; border-color: var(--amber); }
+  .lead-form textarea { resize: vertical; min-height: 60px; }
+  .lead-form button { align-self: flex-start; }
+
+  @media (max-width: 768px) {
+    .lead-fields { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
     .nav-links { display: none; }
@@ -489,6 +506,33 @@
     .hero-stats { grid-template-columns: 1fr 1fr; }
   }
 </style>
+
+<!-- JSON-LD Organization Schema for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SolarAI",
+  "url": "https://www.solaraiusa.com",
+  "description": "AI-powered interconnection advisory for Midwest data center developers. NABCEP certified. ICC certified.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Chicago",
+    "addressRegion": "IL",
+    "addressCountry": "US"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "contact@solaraiusa.com",
+    "contactType": "sales"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Illinois"
+  },
+  "serviceType": ["Power Advisory", "Interconnection Consulting", "Data Center Energy Procurement"]
+}
+</script>
 </head>
 <body>
 
@@ -760,6 +804,26 @@
     </div>
   </div>
 </div>
+
+<!-- Quick Lead Capture - Alternative to Calendly -->
+<section class="lead-capture">
+  <div class="lead-box">
+    <div class="lead-header">
+      <span class="lead-tag">Quick Contact</span>
+      <h3>Not ready for a call?</h3>
+      <p>Send us your project basics. We'll reply within 24 hours.</p>
+    </div>
+    <form class="lead-form" action="mailto:contact@solaraiusa.com" method="post" enctype="text/plain">
+      <div class="lead-fields">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Work email" required>
+        <input type="text" name="company" placeholder="Company">
+      </div>
+      <textarea name="message" placeholder="Project size (MW), location, timeline..." rows="2"></textarea>
+      <button type="submit" class="btn-primary" onclick="trackCTA('lead_form');">Send Project Brief</button>
+    </form>
+  </div>
+</section>
 
 <footer>
   <div class="footer-logo">SolarAI</div>
